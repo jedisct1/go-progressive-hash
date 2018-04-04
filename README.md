@@ -42,7 +42,7 @@ Finally, the remaining `M-N` bits are copied from bits of `h` at the same positi
 
 Computing a full new hash requires a full computation.
 
-However, the verification function can compute the first bit, stop early if it doesn't match, compute the next one only if it does and repeat the process `N` times.
+However, the verification function can compute the first bit, stop early if it doesn't match, compute the next one only if it does and repeat the process until `N` bits have been accumulated.
 
 `M` should be large enough to avoid collisions. The maximum output length is 512 bits.
 
