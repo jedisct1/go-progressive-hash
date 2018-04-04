@@ -54,19 +54,19 @@ On the other hand, `N` should be short enough to produce collisions during the f
 seed := []byte("test application")
 in := []byte("input string")
 
-h, err := Hash(in, seed, 50000, 8, 256)
+h, err := progessiveHash.Hash(in, seed, 50000, 8, 256)
 if err != nil {
 	panic(err)
 }
 
-err = Verify(in, seed, 50000, 8, 256, h)
+err = progessiveHash.Verify(in, seed, 50000, 8, 256, h)
 if err != nil {
 	panic(err)
 }
 
 // This is unlikely to require a full computation
 badIn := []byte("wrong input")
-err = Verify(badIn, seed, 10000, 8, 256, h)
+err = progessiveHash.Verify(badIn, seed, 10000, 8, 256, h)
 if err != nil {
 	panic("verification shouldn't have passed")
 }
