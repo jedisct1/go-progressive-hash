@@ -36,17 +36,17 @@ h = G(r, h)
 B(n, o) := B(0, h)
 ```
 
-The work factor doubles after every computed bit.
+Individual bits of the prefix are computed sequentially and the work factor doubles after every bit.
 
 Finally, the remaining `M-N` bits are copied from bits of `h` at the same position.
 
-Computing a new hash requires a full computation.
+Computing a full new hash requires a full computation.
 
 However, the verification function can compute the first bit, stop early if it doesn't match, compute the next one only if it does and repeat the process `N` times.
 
 `M` should be large enough to avoid collisions. The maximum output length is 512 bits.
 
-On the other hand, `N` should be short enough to produce collisions during the fast part of the computation, so that the remaining `M-N` bits are mandatory in order to compute valid inputs.
+On the other hand, `N` should be short enough to produce collisions during the fast part of the computation.
 
 # Example
 
@@ -64,7 +64,9 @@ if err != nil {
 	panic(err)
 }
 
-err = Verify(in, seed, 10000, 8, 256, h)
+// This is unlikely to require a full computation
+badIn := []byte("wrong input")
+err = Verify(badIn, seed, 10000, 8, 256, h)
 if err != nil {
 	panic("verification shouldn't have passed")
 }
