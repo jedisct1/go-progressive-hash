@@ -66,7 +66,7 @@ if err != nil {
 
 // This is unlikely to require a full computation
 badIn := []byte("wrong input")
-err = progessiveHash.Verify(badIn, seed, 10000, 8, 256, h)
+err = progessiveHash.Verify(badIn, seed, 50000, 8, 256, h)
 if err != nil {
 	panic("verification shouldn't have passed")
 }
