@@ -2,7 +2,6 @@ package progressiveHash
 
 import (
 	"errors"
-	"fmt"
 
 	"golang.org/x/crypto/blake2b"
 )
@@ -46,9 +45,7 @@ func hash(in []byte, seed []byte, initialRounds uint64, progressiveLength int, o
 		}
 	}
 	xrounds := initialRounds
-	i := uint(0)
-	for ; i < uint(progressiveLength); i++ {
-		fmt.Println(i)
+	for i := uint(0); i < uint(progressiveLength); i++ {
 		for j := uint64(0); j < xrounds; j++ {
 			h = blake2b.Sum512(h[:])
 		}
@@ -63,14 +60,14 @@ func hash(in []byte, seed []byte, initialRounds uint64, progressiveLength int, o
 	}
 	if expected != nil {
 		ck := uint8(0)
-		for ; i < uint(outLength); i++ {
+		for i := uint(1); i < uint(outLength); i++ {
 			ck |= ((*expected)[i>>3]>>(i&7))&1 ^ uint8((h[i>>3]>>(i&7))&1)
 		}
 		if ck != 0 {
 			return out, errors.New("mismatch")
 		}
 	} else {
-		for ; i < uint(outLength); i++ {
+		for i := uint(1); i < uint(outLength); i++ {
 			out[i>>3] |= uint8((h[i>>3]>>(i&7))&1) << (i & 7)
 		}
 	}
