@@ -7,31 +7,31 @@ import (
 	"golang.org/x/crypto/blake2b"
 )
 
-// Hash - Hash `in` with personalisation `personal`, an initial number of rounds `initialRounds`,
+// Hash - Hash `in` with seedisation `seed`, an initial number of rounds `initialRounds`,
 // and increase the work factor `progressiveLength` times to eventually produce an `outLength` bit-long digest.
-func Hash(in []byte, personal []byte, initialRounds uint64, progressiveLength int, outLength int) ([]byte, error) {
-	return hash(in, personal, initialRounds, progressiveLength, outLength, nil)
+func Hash(in []byte, seed []byte, initialRounds uint64, progressiveLength int, outLength int) ([]byte, error) {
+	return hash(in, seed, initialRounds, progressiveLength, outLength, nil)
 }
 
-// Verify - Verify a previously computed hash `expected` using the input `in`, a personalisation `personal`,
+// Verify - Verify a previously computed hash `expected` using the input `in`, a seedisation `seed`,
 // increasing the work factor `progressiveLength` times to match the initial hash length `outLength` bits.
-func Verify(in []byte, personal []byte, initialRounds uint64, progressiveLength int, outLength int, expected []byte) error {
-	_, err := hash(in, personal, initialRounds, progressiveLength, outLength, &expected)
+func Verify(in []byte, seed []byte, initialRounds uint64, progressiveLength int, outLength int, expected []byte) error {
+	_, err := hash(in, seed, initialRounds, progressiveLength, outLength, &expected)
 	return err
 }
 
-func hash(in []byte, personal []byte, initialRounds uint64, progressiveLength int, outLength int, expected *[]byte) ([]byte, error) {
+func hash(in []byte, seed []byte, initialRounds uint64, progressiveLength int, outLength int, expected *[]byte) ([]byte, error) {
 	if progressiveLength < 0 || outLength < 1 {
 		return nil, errors.New("invalid output length")
 	}
-	if len(personal) > 127 {
-		return nil, errors.New("personalization too long")
+	if len(seed) > 127 {
+		return nil, errors.New("seed too long")
 	}
 	if outLength < progressiveLength {
 		outLength = progressiveLength
 	}
 	xin := make([]byte, 128+len(in))
-	copy(xin, personal)
+	copy(xin, seed)
 	copy(xin[128:], in)
 	h := blake2b.Sum512(xin)
 	var out []byte
