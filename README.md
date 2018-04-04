@@ -4,7 +4,7 @@ Traditional password stretching functions such as PBKDF2, Scrypt, Bcrypt and Arg
 
 The flipside is that in order to verify that an input matches a previously computed hash, the whole computation has to be performed again. This requires significant resources, even if the input doesn't happen to match the expected hash.
 
-This package implements a proof of concept of a _progressive hash function_, that can detect a mismatching hash for a given input _while doing the computation_, and thus return early instead of performing the full computation.
+This package implements a proof of concept of a _progressive hash function_, a PBKDF2 variant that can detect a mismatching hash for a given input _while doing the computation_, and thus return early instead of performing the full computation.
 
 The first output bits of this function are computed as follows:
 
