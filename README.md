@@ -48,7 +48,7 @@ However, the verification function can compute the first bit, stop early if it d
 
 On the other hand, `N` should be short enough to produce collisions during the fast part of the computation.
 
-# Example
+# Usage
 
 ```go
 seed := []byte("test application")
