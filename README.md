@@ -17,23 +17,23 @@ M: total output length
 seed: application-specific seed
 B(b, x): bit b of x
 R0: initial number of iterations
-C := 2
+C <- 2
 
-h := H(seed || pad || in)
+h <- H(seed || pad || in)
 
-r := R0
-h = G(r, h)
-B(0, o) := B(0, h)
+r <- R0
+h <- G(r, h)
+B(0, o) <- B(0, h)
 
-r := r * C
-h = G(r, h)
-B(1, o) := B(0, h)
+r <- r * C
+h <- G(r, h)
+B(1, o) <- B(0, h)
 
 ...
 
-r := r * C
-h = G(r, h)
-B(n, o) := B(0, h)
+r <- r * C
+h <- G(r, h)
+B(n, o) <- B(0, h)
 ```
 
 Individual bits of the prefix are computed sequentially and the work factor doubles after every bit.
