@@ -10,7 +10,7 @@ The first output bits of this function are computed as follows:
 
 ```text
 H(x): BLAKE2B-512(x)
-G(R, x): R recursive iterations of H(x)
+G(r, x): r recursive iterations of H(x)
 o: output
 N: number of progressive bits in the output
 M: total output length
