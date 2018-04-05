@@ -19,7 +19,7 @@ B(b, x): bit b of x
 R0: initial number of iterations
 C := 2
 
-h := H(seed || in)
+h := H(seed || pad || in)
 
 r := R0
 h = G(r, h)
