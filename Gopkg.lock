@@ -5,7 +5,13 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["blake2b"]
-  revision = "b2aa35443fbc700ab74c586ae79b81c171851023"
+  revision = "1a580b3eff7814fc9b40602fd35256c63b50f491"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["cpu"]
+  revision = "7c87d13f8e835d2fb3a70a2912c811ed0c1d241b"
 
 [solve-meta]
   analyzer-name = "dep"
