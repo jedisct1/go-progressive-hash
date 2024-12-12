@@ -1,5 +1,7 @@
 module github.com/jedisct1/go-progressive-hash
 
-go 1.16
+go 1.23.4
 
-require golang.org/x/crypto v0.0.0-20210513164829-c07d793c2f9a
+require golang.org/x/crypto v0.31.0
+
+require golang.org/x/sys v0.28.0 // indirect
